@@ -4,12 +4,23 @@ class GroupTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: props.group.reduce((acc, cur) => ({
-        ...acc, [cur.nombre]: parseInt(cur.calificacion, 10)
-      }), {})
+      data: []
     }
     this.hndSave = this.hndSave.bind(this)
     this.hndChange = this.hndChange.bind(this)
+  }
+
+  static getDerivedStateFromProps (props, state) {
+    const propNames = props.group.map(el => el.nombre)
+    const stateNames = Object.keys(state.data)
+    const change = propNames.filter(e => stateNames.indexOf(e) < 0)
+    if (change.length > 0) {
+      return {
+        data: props.group.reduce((acc, cur) => ({
+          ...acc, [cur.nombre]: parseInt(cur.calificacion, 10)
+        }), {})
+      }
+    }
   }
 
   hndSave (e) {
@@ -60,6 +71,7 @@ class GroupTable extends Component {
           </tfoot>
         </table>
         <button type="button" onClick={this.hndSave}>Guardar</button>
+        <small>Renderizado con React</small>
       </Fragment>
     )
   }
