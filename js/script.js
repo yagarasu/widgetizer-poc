@@ -16,11 +16,12 @@
       { nombre: 'Juan', calificacion: 9 }
     ]
   };
+  window.gp = grupos;
 
   $(document).ready(function () {
 
     // Inicializar widget
-    $('#jq-react-table')
+    $('#table')
     .grouptable({
       group: grupos['1A'],
 
@@ -30,13 +31,13 @@
         var val = $('#groups').val();
         grupos[val] = data.slice();
       }
-    })
+    });
 
     // Listener al select
     $('#groups').on('change', function () {
       var val = $(this).val();
       // Asignar nuevos datos
-      $('#jq-react-table')
+      $('#table')
         .grouptable('option', 'group', grupos[val]);
     });
   });

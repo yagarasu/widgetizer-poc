@@ -25,9 +25,10 @@ class GroupTable extends Component {
 
   hndSave (e) {
     const { data } = this.state
-    this.props.onSave(Object.keys(data).reduce((acc, cur) => ([
+    const group = Object.keys(data).reduce((acc, cur) => ([
       ...acc, { nombre: cur, calificacion: data[cur] }
-    ]), []))
+    ]), [])
+    this.props.onSave(group)
   }
 
   hndChange (key) {
