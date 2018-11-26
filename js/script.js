@@ -19,25 +19,25 @@
 
   $(document).ready(function () {
 
-    // // Inicializar widget
-    // $('#table')
-    // .grouptable({
-    //   group: grupos['1A'],
-    //
-    //   // Listener del boton
-    //   save: function (e) {
-    //     console.log('Save!', e.data);
-    //     var val = $('#groups').val();
-    //     grupos[val] = Object.assign({}, e.data);
-    //   }
-    // })
-    //
-    // // Listener al select
-    // $('#groups').on('change', function () {
-    //   var val = $(this).val();
-    //   // Asignar nuevos datos
-    //   $('#table')
-    //     .grouptable('option', 'group', grupos[val]);
-    // });
+    // Inicializar widget
+    $('#jq-react-table')
+    .grouptable({
+      group: grupos['1A'],
+
+      // Listener del boton
+      save: function (e, { data }) {
+        console.log('Save!', e, data);
+        var val = $('#groups').val();
+        grupos[val] = data.slice();
+      }
+    })
+
+    // Listener al select
+    $('#groups').on('change', function () {
+      var val = $(this).val();
+      // Asignar nuevos datos
+      $('#jq-react-table')
+        .grouptable('option', 'group', grupos[val]);
+    });
   });
 })(jQuery);
